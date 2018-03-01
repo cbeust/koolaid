@@ -45,7 +45,7 @@ dependencies {
 }
 
 mainClassName = 'com.beust.koolaid.MainKt'
-applicationDefaultJvmArgs = ["-Ddw.server.connector.port=" + System.getenv("PORT").toString()]
+applicationDefaultJvmArgs = ["-Ddw.server.applicationConnectors[0].port=" + System.getenv("PORT").toString()]
 
 run {
     args = ['server', 'config.yml']
