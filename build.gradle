@@ -69,7 +69,7 @@ shadowJar {
 
 // For Heroku
 
-task stage(dependsOn: ['shadowJar', 'build', 'clean'])
+task stage(dependsOn: ['shadowJar', 'clean'])
 
 task copyToLib(type: Copy) {
     into "$buildDir/lib"
