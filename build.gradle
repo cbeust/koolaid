@@ -25,7 +25,6 @@ version '1.0-SNAPSHOT'
 group 'com.beust.koolaid'
 description 'Sample Dropwizard Kotlin app'
 
-apply plugin: 'java'
 apply plugin: 'kotlin'
 apply plugin: 'application'
 
