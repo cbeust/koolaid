@@ -1,0 +1,11 @@
+version: 0.0.1
+ 
+# Change default server ports
+server:
+  applicationConnectors:
+  - type: http
+    port: 9000
+  adminConnectors:
+  - type: http
+    port: 9001
+
