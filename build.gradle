@@ -34,6 +34,7 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -65,3 +66,7 @@ shadowJar {
     }
 //    archiveName 'sample-dropwizard-rest-stub.jar'
 }
+
+// For Heroku
+
+task stage(dependsOn: ['build', 'clean'])
