@@ -1,0 +1,7 @@
+{
+  "name": "Koolaid",
+  "description": "A simple Kotlin + DropWizard demo",
+  "repository": "https://github.com/cbeust/koolaid",
+  "keywords": ["kotlin", "dropwizard" ]
+}
+
