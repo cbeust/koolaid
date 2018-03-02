@@ -19,4 +19,5 @@ kobaltBuild
 .idea
 *.iml
 local.properties
+out
 
