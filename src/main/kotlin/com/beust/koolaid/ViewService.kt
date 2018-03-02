@@ -7,7 +7,9 @@ import javax.ws.rs.core.MediaType
 
 @Path("/v0/views")
 class ViewService {
+    private val dao = ViewsDaoPostgres()
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    fun retrieveViewCount(): ViewCount = ViewCount(1)
+    fun retrieveViewCount(): ViewCount = ViewCount(dao.getViewCountAndIncrement())
 }

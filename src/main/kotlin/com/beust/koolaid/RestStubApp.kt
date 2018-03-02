@@ -6,8 +6,7 @@ import io.dropwizard.setup.Environment
 class RestStubApp : Application<RestStubConfig>() {
 
     override fun run(config: RestStubConfig, env: Environment) {
-        val service = ViewService()
-        env.jersey().register(service)
+        env.jersey().register(ViewService())
 
         env.healthChecks().register("template", RestStubCheck(config.version))
     }
