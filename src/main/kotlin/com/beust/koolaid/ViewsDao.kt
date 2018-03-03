@@ -2,13 +2,7 @@ package com.beust.koolaid
 
 import java.net.URI
 import java.sql.DriverManager
-
-<<<<<<< HEAD
-import java.net.URI
-=======
->>>>>>> 976750e5c409746ecc91ea2fa68f3c908fefb8e9
 import java.sql.Connection
-import java.sql.DriverManager
 
 interface ViewsDao {
     fun getViewCountAndIncrement(): Int
