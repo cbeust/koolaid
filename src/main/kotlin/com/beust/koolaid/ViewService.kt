@@ -8,8 +8,8 @@ import javax.ws.rs.core.MediaType
 @Path("/v0/views")
 class ViewService {
     private val dao =
-//            ViewsDaoInMemory()
-        ViewsDaoPostgres()
+            ViewsDaoInMemory()
+//        ViewsDaoPostgres()
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
