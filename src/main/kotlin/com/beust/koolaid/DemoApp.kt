@@ -5,15 +5,15 @@ import io.dropwizard.assets.AssetsBundle
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 
-class RestStubApp : Application<RestStubConfig>() {
+class DemoApp : Application<DemoConfig>() {
 
-    override fun initialize(configuration: Bootstrap<RestStubConfig>) {
+    override fun initialize(configuration: Bootstrap<DemoConfig>) {
         configuration.addBundle(AssetsBundle("/assets", "/", "index.html", "static"));
     }
 
-    override fun run(config: RestStubConfig, env: Environment) {
+    override fun run(config: DemoConfig, env: Environment) {
         env.jersey().register(ViewService())
 
-        env.healthChecks().register("template", RestStubCheck(config.version))
+        env.healthChecks().register("template", DemoCheck(config.version))
     }
 }
