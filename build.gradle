@@ -44,6 +44,8 @@ dependencies {
         "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
         "io.dropwizard:dropwizard-core:$dropWizardVersion",
         "io.dropwizard:dropwizard-assets:$dropWizardVersion",
+        "com.google.inject:guice:4.2.0",
+        "com.hubspot.dropwizard:dropwizard-guice:1.0.6.0",
         "postgresql:postgresql:9.1-901-1.jdbc4"
 
     testCompile "org.testng:testng:6.14.3"
