@@ -4,6 +4,7 @@ import java.time.format.DateTimeFormatter
 
 buildscript {
     ext.kotlinVersion = '1.2.30'
+    ext.dropWizardVersion = '1.2.4'
 
     repositories {
         mavenCentral()
@@ -39,7 +40,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
         "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion",
-        "io.dropwizard:dropwizard-core:1.2.4",
+        "io.dropwizard:dropwizard-core:$dropWizardVersion",
+        "io.dropwizard:dropwizard-assets:$dropWizardVersion",
         "postgresql:postgresql:9.1-901-1.jdbc4"
 
     testCompile "org.testng:testng:6.14.3"

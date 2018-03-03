@@ -1,11 +1,20 @@
 package com.beust.koolaid
 
 import java.net.URI
-import java.sql.DriverManager
 import java.sql.Connection
+import java.sql.DriverManager
 
 interface ViewsDao {
     fun getViewCountAndIncrement(): Int
+}
+
+class ViewsDaoInMemory: ViewsDao {
+    var count = 0
+    override fun getViewCountAndIncrement(): Int {
+        val result = count
+        count++
+        return result
+    }
 }
 
 class ViewsDaoPostgres : ViewsDao {
