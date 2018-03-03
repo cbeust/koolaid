@@ -1,8 +1,8 @@
 package com.beust.koolaid
 
 import java.net.URI
-import java.sql.DriverManager
 import java.sql.Connection
+import java.sql.DriverManager
 
 interface ViewsDao {
     fun getViewCountAndIncrement(): Int
@@ -19,7 +19,7 @@ class ViewsDaoPostgres : ViewsDao {
 
         val username = dbUri.userInfo.split(":")[0]
         val password = dbUri.userInfo.split(":")[1]
-        val dbUrl = "jdbc:postgresql://" + dbUri.host + ':' + dbUri.port + dbUri.path + "?sslmode=require"
+        val dbUrl = "jdbc:postgresql://" + dbUri.host + ':' + dbUri.port + dbUri.path + "?ssl=true"
 
         println("DATABASE_URL: $databaseUrl")
         println("dbUrl: $dbUrl")
