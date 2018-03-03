@@ -1,8 +1,19 @@
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
 var app = new Vue({
     el: '#app',
-    data: {
-        message: 'Hello Vue!'
+    computed: {
+        viewCount: function() {
+            var views = JSON.parse(httpGet('/api/v0/views'));
+            var result = views.count;
+            console.log("View count: " + result);
+            return result;
+        }
     }
-})
-
-console.log("Initialized vue")
+});
