@@ -1,0 +1,6 @@
+# Valid: postgres | inMemory
+DATABASE=postgres
+
+#DATABASE_USER=foo
+#DATABASE_PASSWORD=bar
+

@@ -24,6 +24,14 @@ class LocalProperties {
 
     fun get(name: String, defaultValue: String? = null): String? = localProperties.getProperty(name) ?: defaultValue
 
-//    fun getOrThrows(name: String) = get(name)
-//                ?: throw IllegalArgumentException("Couldn't find $name in local.properties")
+    fun db(def: String? = "inMemory") : String? {
+        val result = get("DATABASE", def)
+        if (result != null && result != "postgres" && result != "inMemory") {
+            throw IllegalArgumentException("Illegal database $result, should be 'postgres' or 'inMemory'")
+        }
+        return result
+    }
+    fun dbUser(def: String? = null) = get("DATABASE_USER", def)
+    fun dbPassword(def: String? = null) = get("DATABASE_PASSWORD", def)
+    fun dbUrl(def: String? = null) = get("DATABASE_URL", def)
 }
