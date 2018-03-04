@@ -34,7 +34,7 @@ class LocalProperties {
 
     fun get(p: LocalProperty) : String? {
         val result = localProperties.getProperty(p.name)
-        if (p.allowed.any() && ! p.allowed.contains(result)) {
+        if (result != null && p.allowed.any() && ! p.allowed.contains(result)) {
             throw IllegalArgumentException("Illegal value for \"$p\": \"$result\", allowed values: ${p.allowed}")
         }
         return result
