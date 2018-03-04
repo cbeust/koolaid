@@ -5,16 +5,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
 
-enum class Database(val value: String) {
-    POSTGRESQL("postgresql"), IN_MEMORY("inMemory")
-}
-
-enum class LocalProperty(val allowed: Set<String> = hashSetOf()) {
-    DATABASE(setOf(Database.POSTGRESQL.value, Database.IN_MEMORY.value)),
-    DATABASE_USER,
-    DATABASE_PASSWORD;
-}
-
 /**
  * Encapsulate read access to local.properties.
  */
@@ -39,4 +29,14 @@ class LocalProperties {
         }
         return result
     }
+}
+
+enum class Database(val value: String) {
+    POSTGRESQL("postgresql"), IN_MEMORY("inMemory")
+}
+
+enum class LocalProperty(val allowed: Set<String> = hashSetOf()) {
+    DATABASE(setOf(Database.POSTGRESQL.value, Database.IN_MEMORY.value)),
+    DATABASE_USER,
+    DATABASE_PASSWORD;
 }
