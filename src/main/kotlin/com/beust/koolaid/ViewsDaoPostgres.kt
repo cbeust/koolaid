@@ -11,15 +11,27 @@ class ViewsDaoPostgres @Inject constructor(localProperties: LocalProperties) : V
         Class.forName("org.postgresql.Driver")
 
         // postgres://{user}:{password}@{hostname}:{port}/{database-name}
-        val databaseUrl = localProperties.dbUrl() ?: System.getenv("DATABASE_URL")
-        val dbUri = URI(databaseUrl ?: "postgres://guest:guest@localhost:5432/demo")
+        val envDbUrl = System.getenv("DATABASE_URL")
+        val (dbUrl, username, password) =
+            if (envDbUrl != null) {
+                // Heroku, extract username and password from DATABASE_URL
+                URI(envDbUrl).let { dbUri ->
+                    dbUri.userInfo.split(":").let { split ->
+                        val username = split[0]
+                        val password = split[1]
+                        Triple(envDbUrl, username, password)
+                    }
+                }
+            } else {
+                // Local
+                val envUsername = localProperties.get(LocalProperty.DATABASE_USER)// ?: "dbUri.userInfo.split(":")[0]"
+                val envPassword = localProperties.get(LocalProperty.DATABASE_PASSWORD)// ?: dbUri.userInfo.split(":")[1]
+                val database = localProperties.get(LocalProperty.DATABASE)
+                val dbUrl = "jdbc:$database:demo"
+                Triple(dbUrl, envUsername, envPassword)
+            }
 
-        val username = localProperties.dbUser() ?: dbUri.userInfo.split(":")[0]
-        val password = localProperties.dbPassword() ?: dbUri.userInfo.split(":")[1]
-        val dbUrl = "jdbc:postgresql://" + dbUri.host + ':' + dbUri.port + dbUri.path + "?sslmode=require"
-
-        println("DATABASE_URL: $databaseUrl")
-        println("dbUrl: $dbUrl, user: $username, password: $password")
+        println("Connecting to dbUrl: $dbUrl, user: $username, password: $password")
         conn = DriverManager.getConnection(dbUrl, username, password)
 
 //        val url = System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql:demo"

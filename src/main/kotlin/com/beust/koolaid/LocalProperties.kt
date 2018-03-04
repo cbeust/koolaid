@@ -5,6 +5,12 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.*
 
+enum class LocalProperty(val allowed: Set<String> = hashSetOf<String>()) {
+    DATABASE(setOf("postgresql", "inMemory")),
+    DATABASE_USER,
+    DATABASE_PASSWORD;
+}
+
 /**
  * Encapsulate read access to local.properties.
  */
@@ -22,16 +28,11 @@ class LocalProperties {
         }
     }
 
-    fun get(name: String, defaultValue: String? = null): String? = localProperties.getProperty(name) ?: defaultValue
-
-    fun db(def: String? = "inMemory") : String? {
-        val result = get("DATABASE", def)
-        if (result != null && result != "postgres" && result != "inMemory") {
-            throw IllegalArgumentException("Illegal database $result, should be 'postgres' or 'inMemory'")
+    fun get(p: LocalProperty) : String? {
+        val result = localProperties.getProperty(p.name)
+        if (p.allowed.any() && ! p.allowed.contains(result)) {
+            throw IllegalArgumentException("Illegal value for \"$p\": \"$result\", allowed values: ${p.allowed}")
         }
         return result
     }
-    fun dbUser(def: String? = null) = get("DATABASE_USER", def)
-    fun dbPassword(def: String? = null) = get("DATABASE_PASSWORD", def)
-    fun dbUrl(def: String? = null) = get("DATABASE_URL", def)
 }
