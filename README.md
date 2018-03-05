@@ -22,9 +22,7 @@ Then open `http://localhost`. You should see a page telling you how many times i
 
 You can deploy this application on your own Heroku instance by pressing this button:
 
-___
-
-This application can be deployed on the free tier ("hobby") of Heroku.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 ## Development
 
@@ -49,3 +47,20 @@ DATABASE_PASSWORD=bar
 
 ## Architecture
 
+The persistence is abstracted by the `ViewsDao` interface, which is implemented by both `ViewDaoPostgres`and `ViewsDaoInMemory`. Which implementation to use is decided by `DemoModule` based on the environment: if run
+on your local machine, use the in-memory instance, otherwise (Heroku), use PostgreSQL. If you have
+PostgreSQL running on your local machine, you can configure the app to use it by creating a file `local.properties`
+(which is ignored by git) with the following content:
+
+```
+# Valid: postgresql | inMemory
+DATABASE=postgresql
+
+DATABASE_USER=postgres
+DATABASE_PASSWORD=admin
+```
+
+Access to this file is managed by `LocalProperties`.
+
+Whenever the landing page is refreshed, the `vue.js` app inside makes an HTTP call to `/v0/views` which returns the
+number of views, increments that counter and saves it into the `ViewsDao` object.
