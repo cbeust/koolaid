@@ -50,14 +50,15 @@ DATABASE_USER=foo
 DATABASE_PASSWORD=bar
 ```
 
+Access to the `local.properties` file is managed by [`LocalProperties`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/LocalProperties.kt).
+
 ## Architecture
 
-The persistence is abstracted by the [`ViewsDao`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDao.kt) interface, which is implemented by both [`ViewDaoPostgres`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDaoPostgres.kt) and [`ViewsDaoInMemory`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDaoPostgres.kt).
+Persistence is abstracted by the [`ViewsDao`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDao.kt) interface, which is implemented by both [`ViewDaoPostgres`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDaoPostgres.kt) and [`ViewsDaoInMemory`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewsDaoPostgres.kt).
 
-Which implementation to use is decided by [`DemoModule`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/DemoModule.kt) based on the environment: if run
-on your local machine, use the in-memory instance, otherwise (Heroku), use PostgreSQL.
-
-Access to this file is managed by [`LocalProperties`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/LocalProperties.kt).
+Which implementation to use is decided by [`DemoModule`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/DemoModule.kt) based on the environment: if 
+running on Heroku or locally with the Postgres coordinates defined, use Postgres, otherwise use the in-memory
+DAO. The correct DAO is then injected in the [`ViewService`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewService.kt) by Guice.
 
 Whenever the landing page is refreshed, the `vue.js` app inside makes an HTTP call to `/v0/views` which returns the
 number of views, increments that counter, and saves it into the `ViewsDao` object.
