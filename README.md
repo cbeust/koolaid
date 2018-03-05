@@ -57,4 +57,4 @@ on your local machine, use the in-memory instance, otherwise (Heroku), use Postg
 Access to this file is managed by [`LocalProperties`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/LocalProperties.kt).
 
 Whenever the landing page is refreshed, the `vue.js` app inside makes an HTTP call to `/v0/views` which returns the
-number of views, increments that counter and saves it into the `ViewsDao` object.
+number of views, increments that counter, and saves it into the `ViewsDao` object.
