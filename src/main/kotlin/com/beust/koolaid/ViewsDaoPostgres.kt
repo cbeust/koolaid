@@ -36,14 +36,7 @@ class ViewsDaoPostgres @Inject constructor(localProperties: LocalProperties) : V
         conn = DriverManager.getConnection(dbUrl, username, password)
     }
 
-    override fun getViewCountAndIncrement(): Int {
-        val result = count
-        count = result + 1
-        return result
-    }
-
-
-    private var count: Int
+    override var count: Int
         set(value) {
             conn.createStatement().let { st ->
                 st.execute("UPDATE views SET count=$value")

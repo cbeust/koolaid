@@ -1,6 +1,7 @@
 package com.beust.koolaid
 
 interface ViewsDao {
-    fun getViewCountAndIncrement(): Int
+    var count: Int
+    fun getViewCountAndIncrement(): Int = count++
 }
 
