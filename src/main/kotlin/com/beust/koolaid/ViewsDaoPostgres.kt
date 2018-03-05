@@ -24,8 +24,8 @@ class ViewsDaoPostgres @Inject constructor(localProperties: LocalProperties) : V
                 }
             } else {
                 // Local
-                val envUsername = localProperties.get(LocalProperty.DATABASE_USER)// ?: "dbUri.userInfo.split(":")[0]"
-                val envPassword = localProperties.get(LocalProperty.DATABASE_PASSWORD)// ?: dbUri.userInfo.split(":")[1]
+                val envUsername = localProperties.get(LocalProperty.DATABASE_USER)
+                val envPassword = localProperties.get(LocalProperty.DATABASE_PASSWORD)
                 val database = localProperties.get(LocalProperty.DATABASE)
                 val dbUrl = "jdbc:$database:demo"
                 Triple(dbUrl, envUsername, envPassword)
@@ -33,11 +33,6 @@ class ViewsDaoPostgres @Inject constructor(localProperties: LocalProperties) : V
 
         println("Connecting to dbUrl: $dbUrl, user: $username, password: $password")
         conn = DriverManager.getConnection(dbUrl, username, password)
-
-//        val url = System.getenv("JDBC_DATABASE_URL") ?: "jdbc:postgresql:demo"
-//        val user = System.getenv("JDBC_DATABASE_USER") ?: "guest"
-//        val password = System.getenv("JDBC_DATABASE_PASSWORD") ?: "guest"
-//        conn = DriverManager.getConnection(url, user, password)
     }
 
     override fun getViewCountAndIncrement(): Int {
