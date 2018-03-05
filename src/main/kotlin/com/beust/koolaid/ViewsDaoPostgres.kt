@@ -19,7 +19,7 @@ class ViewsDaoPostgres @Inject constructor(localProperties: LocalProperties) : V
                     dbUri.userInfo.split(":").let { split ->
                         val username = split[0]
                         val password = split[1]
-                        val jdbcUrl = System.getenv("DATABASE_URL")
+                        val jdbcUrl = System.getenv("JDBC_DATABASE_URL")
                         Triple(jdbcUrl, username, password)
                     }
                 }
