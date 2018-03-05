@@ -60,7 +60,7 @@ Which implementation to use is decided by [`DemoModule`](https://github.com/cbeu
 running on Heroku or locally with the Postgres coordinates defined, use Postgres, otherwise use the in-memory
 DAO. The correct DAO is then injected in the [`ViewService`](https://github.com/cbeust/koolaid/blob/master/src/main/kotlin/com/beust/koolaid/ViewService.kt) by Guice.
 
-Whenever the landing page is refreshed, the `vue.js` app defined in [`demo.js`](https://github.com/cbeust/koolaid/blob/master/src/main/resources/assets/js/demo.js)` makes an HTTP call to `/v0/views` which 
+Whenever the landing page is refreshed, the `vue.js` app defined in [`demo.js`](https://github.com/cbeust/koolaid/blob/master/src/main/resources/assets/js/demo.js) makes an HTTP call to `/v0/views` which 
 returns
  the
 number of views, increments that counter, and saves it into the `ViewsDao` object.
