@@ -2,7 +2,7 @@
 
 This is a simple application showing how to deploy a database-backed web application written in Kotlin on Heroku.
 
-![Landing page](https://github.com/cbeust/koolaid/blob/master/src/main/resources/assets/screenshot.png?raw=true Landing page)
+[![Landing page](https://github.com/cbeust/koolaid/blob/master/src/main/resources/assets/screenshot.png?raw=true Landing page)]
 
 ## Stack used
 
